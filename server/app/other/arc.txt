@@ -1,0 +1,42 @@
+Обновленная структура проекта
+
+server
+├── app
+│   ├── __init__.py
+│   ├── main.py
+│   ├── models
+│   │   ├── __init__.py
+│   │   ├── user.py
+│   │   ├── room.py
+│   │   ├── game.py
+│   │   ├── transaction.py
+│   ├── schemas
+│   │   ├── __init__.py
+│   │   ├── user.py
+│   │   ├── room.py
+│   │   ├── game.py
+│   │   ├── transaction.py
+│   ├── routers
+│   │   ├── __init__.py
+│   │   ├── auth.py
+│   │   ├── users.py
+│   │   ├── rooms.py
+│   │   ├── games.py
+│   │   ├── transactions.py
+│   │   ├── websocket.py
+│   ├── services
+│   │   ├── __init__.py
+│   │   ├── auth.py
+│   │   ├── user.py
+│   │   ├── room.py
+│   │   ├── game.py
+│   │   ├── transaction.py
+│   ├── db.py
+│   ├── game_logic.py
+├── config
+│   ├── __init__.py
+│   ├── settings.py
+├── requirements.txt
+├── docker-compose.yml
+├── Dockerfile
+└── .env
