@@ -40,3 +40,16 @@ server
 ├── docker-compose.yml
 ├── Dockerfile
 └── .env
+
+
+Основные файлы с базовой функциональностью:
+app/main.py - инициализация FastAPI и регистрация маршрутов.
+app/models.py - модели данных.
+app/schemas.py - схемы данных.
+app/auth.py - аутентификация и авторизация.
+app/websocket.py - обработка WebSocket соединений.
+app/game_logic.py - логика игры.
+app/db.py - подключение к базе данных.
+config/settings.py - конфигурация приложения.
+app/services/ - реализация бизнес-логики.
+app/routers/ - обработка запросов.

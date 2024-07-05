@@ -1,0 +1,14 @@
+# Ignore node_modules directory
+node_modules/
+
+# Ignore .env file
+.env
+
+# Ignore specific files
+main.cjs
+
+# Ignore node_modules directory in bot/ subdirectory
+bot/node_modules/
+
+# Ignore node_modules directory in front-app/ subdirectory
+front-app/node_modules/

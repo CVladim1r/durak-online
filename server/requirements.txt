@@ -6,3 +6,6 @@ fastapi-jwt-auth
 authlib
 pytonapi
 python-dotenv
+bcrypt
+pyjwt
+python-telegram-bot
