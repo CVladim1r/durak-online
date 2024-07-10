@@ -5,7 +5,7 @@ dotenv.config();
 
 const bot = new Telegraf(process.env.BOT_TOKEN);
 
-const WEB_APP_URL = "http://localhost:5173/";
+const WEB_APP_URL = "https://deploy-preview-1--frolicking-griffin-13bd37.netlify.app/";
 
 bot.start((ctx) => {
     ctx.reply("Привет! Нажми на кнопку, чтобы запустить Mini App:", 
@@ -32,11 +32,9 @@ bot.on("webAppData", async (ctx) => {
     console.log("User ID:", userId);
     console.log("Username:", username);
     console.log("Data:", data);
-
-    // Дополнительная логика обработки полученных данных от Mini App
-
     await ctx.reply("Данные успешно получены от Mini App!");
 });
+
 
 // Запуск бота
 bot.launch().then(() => {

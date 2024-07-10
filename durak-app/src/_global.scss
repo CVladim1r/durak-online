@@ -1,0 +1,38 @@
+@import './variables';
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: $font-family;
+  background-color: #f4f4f4;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: $primary-color;
+}
+
+a {
+  text-decoration: none;
+  color: $secondary-color;
+}
+
+nav {
+  background-color: $primary-color;
+  padding: 1rem;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: space-around;
+  padding: 0;
+}
+
+nav ul li {
+  margin: 0;
+}
+
+nav ul li a {
+  color: white;
+  font-weight: bold;
+}
