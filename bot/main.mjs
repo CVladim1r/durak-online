@@ -5,7 +5,7 @@ dotenv.config();
 
 const bot = new Telegraf(process.env.BOT_TOKEN);
 
-const WEB_APP_URL = "https://dev-branch--frolicking-griffin-13bd37.netlify.app/";
+const WEB_APP_URL = "https://deploy-preview-1--frolicking-griffin-13bd37.netlify.app/";
 
 bot.start((ctx) => {
     ctx.reply("Привет! Нажми на кнопку, чтобы запустить Mini App:", 
