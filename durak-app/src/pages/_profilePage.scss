@@ -1,0 +1,29 @@
+@import '../variables';
+
+.profile-page {
+  padding: 2rem;
+  text-align: center;
+
+  h2 {
+    color: $primary-color;
+    margin-bottom: 1rem;
+  }
+
+  .user-info {
+    background: white;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
+    p {
+      margin: 0.5rem 0;
+      strong {
+        color: $secondary-color;
+      }
+    }
+  }
+
+  p {
+    color: $primary-color;
+  }
+}

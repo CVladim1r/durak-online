@@ -1,26 +1,23 @@
-import { useEffect, useState } from 'react';
-import './App.css'; // подключите стили по необходимости
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import GamePage from './pages/GamePages';
+import MarketPage from './pages/MarketPage';
+import ProfilePage from './pages/ProfilePage';
+import InfoPage from './pages/InfoPage';
 
-function App() {
-    const [userData, setUserData] = useState<any>(null);
-
-    useEffect(() => {
-        const Telegram = (window as any).Telegram;
-        if (Telegram && Telegram.WebApp && Telegram.WebApp.initDataUnsafe) {
-            const userData = Telegram.WebApp.initDataUnsafe.user;
-            setUserData(userData);
-        }
-    }, []);
-
-    return (
-        <div className="user-info">
-            <h2>User Profile</h2>
-            <p><strong>Name:</strong> {userData?.first_name} {userData?.last_name}</p>
-            <p><strong>Username:</strong> @{userData?.username}</p>
-            <p><strong>Language Code:</strong> {userData?.language_code}</p>
-            <p><strong>User ID:</strong> {userData?.id}</p>
-        </div>
-    );
-}
+const App: React.FC = () => {
+  return (
+    <Router>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<GamePage />} />
+        <Route path="/market" element={<MarketPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/info" element={<InfoPage />} />
+      </Routes>
+    </Router>
+  );
+};
 
 export default App;
