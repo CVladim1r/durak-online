@@ -4,6 +4,8 @@ node_modules/
 # Ignore .env file
 .env
 
+backend/venv/
+
 # Ignore specific files
 main.cjs
 
