@@ -1,44 +1,50 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telegram WebApp Example</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            padding: 20px;
+            color: #931111;
+        }
+        .user-info {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        .user-info p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="user-info">
+        <h2>User Profile</h2>
+        <p><strong>Name:</strong> <span id="userName"></span></p>
+        <p><strong>Username:</strong> <span id="userUsername"></span></p>
+        <p><strong>Language Code:</strong> <span id="userLanguage"></span></p>
+        <p><strong>User ID:</strong> <span id="userId"></span></p>
+    </div>
 
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-    <title>React App</title>
-  </head>
-  <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
+    <script>
+        // Wait for Telegram WebApp to be ready
+        window.onload = function() {
+            const userData = window.Telegram.WebApp.initDataUnsafe.user;
 
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
-  </body>
+            // Display user information
+            document.getElementById('userName').innerText = `${userData.first_name} ${userData.last_name}`;
+            document.getElementById('userUsername').innerText = `@${userData.username}`;
+            document.getElementById('userLanguage').innerText = userData.language_code;
+            document.getElementById('userId').innerText = userData.id;
+        };
+    </script>
+</body>
 </html>
