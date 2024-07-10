@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import RoomsComponent from '../components/RoomsComponent';
-import GameC from '../components/GameBoard';
+import GameC from '../pp2-components/GameBoard';
+import RoomsComponent from '../pp2-components/RoomsComponent';
 
 const App: React.FC = () => {
   const [currentRoomId, setCurrentRoomId] = useState<number | null>(null);

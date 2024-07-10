@@ -2,9 +2,9 @@ from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 from typing import Dict
 import json
 
-from .utils.room_manager import RoomManager
-from .utils.game_logic import GameManager
-from .models.room import Room, Player
+from utils.room_manager import RoomManager
+from utils.game_logic import GameManager
+from models.room import Room, Player
 
 app = FastAPI()
 

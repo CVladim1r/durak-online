@@ -1,6 +1,6 @@
 from typing import Dict, List, Optional
 from random import shuffle
-from ..models.room import Room, Player, Card, GameStatus
+from models.room import Room, Player, Card, GameStatus
 
 class RoomManager:
     def __init__(self):

@@ -1,80 +1,67 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import Card from './Card';
+import { connectToWebSocket } from '../websocket';
+import { startGame, getGameState } from '../utils/api';
 
-const GameBoard = ({ roomId, playerId }) => {
-    const [roomInfo, setRoomInfo] = useState(null);
-    const [error, setError] = useState('');
+interface GameBoardProps {
+    roomId: number;
+    playerId: number;
+}
+
+const GameBoard: React.FC<GameBoardProps> = ({ roomId, playerId }) => {
+    const [cards, setCards] = useState<string[]>([]);
+    const [playedCards, setPlayedCards] = useState<string[]>([]);
+    const [currentTurn, setCurrentTurn] = useState<number | null>(null);
 
     useEffect(() => {
-        const fetchRoomInfo = async () => {
-            try {
-                const response = await axios.get(`/room/${roomId}`);
-                setRoomInfo(response.data);
-            } catch (error) {
-                setError(error.response.data.detail);
-            }
+        const socket = connectToWebSocket(roomId, playerId);
+
+        socket.onmessage = (event) => {
+            const message = JSON.parse(event.data);
+            handleWebSocketMessage(message);
         };
 
-        if (roomId) {
-            fetchRoomInfo();
-        }
-    }, [roomId]);
+        return () => {
+            socket.close();
+        };
+    }, [roomId, playerId]);
 
-    const handlePlayCard = async (cardIndex) => {
-        try {
-            const response = await axios.post(`/room/${roomId}/play_card`, { player_id: playerId, card_index: cardIndex });
-            setRoomInfo(response.data);
-        } catch (error) {
-            setError(error.response.data.detail);
+    const handleWebSocketMessage = (message: any) => {
+        switch (message.action) {
+            case 'game_state':
+                setCards(message.cards);
+                setPlayedCards(message.played_cards);
+                setCurrentTurn(message.current_turn);
+                break;
+            // Add more cases to handle other actions
         }
     };
 
-    const renderGameInfo = () => {
-        if (!roomInfo) {
-            return <p>Loading...</p>;
-        }
+    const startGameHandler = async () => {
+        await startGame(roomId);
+        const gameState = await getGameState(roomId);
+        setCards(gameState.cards);
+        setPlayedCards(gameState.played_cards);
+        setCurrentTurn(gameState.current_turn);
+    };
 
-        return (
-            <div>
-                <h2>Game Board</h2>
-                <p>Room ID: {roomInfo.id}</p>
-                <p>Status: {roomInfo.status}</p>
-                <p>Current Turn: Player {roomInfo.current_turn}</p>
-
-                {roomInfo.players.map((player, index) => (
-                    <div key={index}>
-                        <h3>Player {player.id}</h3>
-                        <p>Username: {player.username}</p>
-                        <p>Hand:</p>
-                        <ul>
-                            {player.hand.map((card, cardIndex) => (
-                                <li key={cardIndex}>
-                                    {card.rank} of {card.suit}
-                                    {roomInfo.current_turn === player.id && (
-                                        <button onClick={() => handlePlayCard(cardIndex)}>Play Card</button>
-                                    )}
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-                ))}
-
-                <h3>Table</h3>
-                <p>Played Cards:</p>
-                <ul>
-                    {roomInfo.played_cards.map((card, cardIndex) => (
-                        <li key={cardIndex}>{card.rank} of {card.suit}</li>
-                    ))}
-                </ul>
-
-                {error && <p>Error: {error}</p>}
-            </div>
-        );
+    const playCard = (cardIndex: number) => {
+        // Send play_card action to WebSocket
     };
 
     return (
-        <div>
-            {renderGameInfo()}
+        <div className="game-board">
+            <button onClick={startGameHandler}>Start Game</button>
+            <div className="played-cards">
+                {playedCards.map((card, index) => (
+                    <Card key={index} card={card} onClick={() => {}} />
+                ))}
+            </div>
+            <div className="hand-cards">
+                {cards.map((card, index) => (
+                    <Card key={index} card={card} onClick={() => playCard(index)} />
+                ))}
+            </div>
         </div>
     );
 };

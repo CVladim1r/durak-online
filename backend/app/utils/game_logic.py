@@ -1,7 +1,6 @@
 from typing import Dict
-from ..models.room import Room, Player, GameStatus
-from ..models.game import Game
-from ..main import *
+from models.room import Room, Player, GameStatus
+from models.game import Game
 class GameManager:
     def __init__(self):
         self.rooms: Dict[int, Room] = {}
